@@ -8,7 +8,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p ./",
-    "dev": "concurrently 'yarn build -w' 'nodemon dist'"
+    "dev": "concurrently 'yarn build -w' 'yarn start'",
+    "start": "nodemon dist"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
