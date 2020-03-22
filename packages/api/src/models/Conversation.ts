@@ -15,8 +15,8 @@ export class Conversation extends Model<Conversation> {
     @Column
     title: string;
 
-    @HasMany(() => User)
-    user: User[];
+    // @HasMany(() => User)
+    // user: User[];
 
     @HasMany(() => Message)
     message: Message[];
