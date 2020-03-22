@@ -16,12 +16,8 @@ export class Conversation extends Model<Conversation> {
     title: string;
 
     @HasMany(() => User)
-    @AllowNull(false)
-    @Column
     user: User[];
 
     @HasMany(() => Message)
-    @AllowNull(false)
-    @Column
     message: Message[];
 };

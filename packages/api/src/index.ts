@@ -3,6 +3,7 @@ import { middlewarelogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
 import { sequelize } from './database';
 import bodyParser from 'body-parser';
+import { conversationsRouter } from './routes/conversations';
 
 const run = async () => {
 
@@ -23,17 +24,17 @@ const run = async () => {
     // 2. Response
     // 3. Next - send you to the next middleware on the pipeline
 
-    app.use(bodyParser.json()) // for parsing application/json
-    app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    app.use(bodyParser.json()); // for parsing application/json
 
     // defining a new pipe
     app.use(middlewarelogger);
     app.use('/users', usersRouter);
+    app.use('/users/:userID/conversations', conversationsRouter);
 
     // run the server on port 9999
     app.listen(9999);
 
-    console.log(`API running on port http://localhost:9999`);
+    console.log('API running on port http://localhost:9999');
 };
 
 run();

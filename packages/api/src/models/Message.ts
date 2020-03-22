@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table, AllowNull, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Conversation } from './Conversation';
 import { User } from './User';
 
@@ -11,22 +11,17 @@ export class Message extends Model<Message> {
     })
     id: string;
 
-    @AllowNull(false)
     @Column
     Message: string;
 
     @ForeignKey(() => Conversation)
-    @AllowNull(false)
     @Column
     conversationID: string;
 
     @ForeignKey(() => User)
-    @AllowNull(false)
     @Column
     userID: string;
 
     @BelongsTo(() => Conversation)
-    @AllowNull(false)
-    @Column
     conversation: Conversation;
 };
