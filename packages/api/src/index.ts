@@ -3,7 +3,7 @@ import { middlewarelogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
 import { sequelize } from './database';
 import bodyParser from 'body-parser';
-// import { conversationsRouter } from './routes/conversations';
+import { conversationsRouter } from './routes/conversations';
 
 const run = async () => {
 
@@ -29,7 +29,7 @@ const run = async () => {
     // defining a new pipe
     app.use(middlewarelogger);
     app.use('/users', usersRouter);
-    // app.use('/users/:userID/conversations', conversationsRouter);
+    app.use('/conversations', conversationsRouter);
 
     // run the server on port 9999
     app.listen(9999);

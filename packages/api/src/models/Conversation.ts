@@ -1,8 +1,9 @@
-import { Column, DataType, Model, Table, AllowNull, HasMany } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, AllowNull, HasMany, BelongsToMany } from 'sequelize-typescript';
 import { Message } from './Message';
 import { User } from './User';
+import { UserConversation } from './UserConversation';
 
-@Table
+@Table({ paranoid: true })
 export class Conversation extends Model<Conversation> {
     @Column({
         defaultValue: DataType.UUIDV4,
@@ -13,11 +14,13 @@ export class Conversation extends Model<Conversation> {
 
     @AllowNull(false)
     @Column
-    title: string;
+    name: string;
 
-    // @HasMany(() => User)
-    // user: User[];
+    // Setup relationship to users
+    @BelongsToMany(() => User, () => UserConversation)
+    users: User[];
 
+    // Setup relationship to msgs
     @HasMany(() => Message)
-    message: Message[];
+    messages: Message[];
 };

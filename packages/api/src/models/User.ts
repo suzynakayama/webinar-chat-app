@@ -1,5 +1,6 @@
-import { Column, DataType, Model, Table, Unique, AllowNull, DeletedAt, ForeignKey } from 'sequelize-typescript';
-// import { Conversation } from './Conversation';
+import { Column, DataType, Model, Table, Unique, AllowNull, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import { Conversation } from './Conversation';
+import { UserConversation } from './UserConversation';
 
 @Table({ paranoid: true })
 export class User extends Model<User> {
@@ -30,7 +31,6 @@ export class User extends Model<User> {
     @DeletedAt
     deletionAt: Date;
 
-    // @ForeignKey(() => Conversation)
-    // @Column
-    // conversationID: string;
+    @BelongsToMany(() => Conversation, () => UserConversation)
+    conversations: Conversation[];
 };

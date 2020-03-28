@@ -1,27 +1,33 @@
-import { Column, DataType, Model, Table, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, ForeignKey, BelongsTo, AllowNull } from 'sequelize-typescript';
 import { Conversation } from './Conversation';
 import { User } from './User';
 
-@Table
+
+// One to Many relationship. One msg belongs to a conversation, but a conversation can have many msgs.
+@Table({ paranoid: true })
 export class Message extends Model<Message> {
-    @Column({
-        defaultValue: DataType.UUIDV4,
-        primaryKey: true,
-        type: DataType.UUID
-    })
-    id: string;
+	@Column({
+	defaultValue: DataType.UUIDV4,
+	primaryKey: true,
+	type: DataType.UUID
+	})
+	id: string;
 
-    @Column
-    Message: string;
+	@AllowNull(false)
+	@Column
+	content: string;
 
-    @ForeignKey(() => Conversation)
-    @Column
-    conversationID: string;
+	// column of the conversation id itself
+	@AllowNull(false)
+	@ForeignKey(() => User)
+	@Column
+	userId: number; // who sent the msg
 
-    @ForeignKey(() => User)
-    @Column
-    userID: string;
+	// for Sequelize to create a one to many relationship
+	@BelongsTo(() => Conversation)
+	user: User;
 
-    @BelongsTo(() => Conversation)
-    conversation: Conversation;
+	@ForeignKey(() => Conversation)
+	@Column
+	conversationId: string;
 };
