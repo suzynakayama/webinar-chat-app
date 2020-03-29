@@ -1,0 +1,47 @@
+@import "./reset.scss";
+@import url("https://fonts.googleapis.com/css?family=Spicy+Rice&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Alegreya+Sans:400,700&display=swap");
+
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
+:root {
+	--font-special: "Spicy Rice", cursive;
+
+	--clr-dark: #1a0b15;
+	--clr-light: #fff;
+	--clr-accent-dark: #ff0095;
+	--clr-accent-light: #fcebf8;
+
+	--fs-h1: 3rem;
+	--fs-h2: 2.25rem;
+	--fs-h3: 1.15rem;
+	--fs-body: 1rem;
+
+	--shadow-sml: 0.155em 0.155em 0.75em #e6c1dbde;
+	--shadow-lg: 0.25em 0.25em 0.75em #aaa, 0.125em 0.125em 0.25em #bbb;
+
+	@media (max-width: 390px) {
+		--fs-h1: 2.6rem;
+		--fs-h2: 1.5rem;
+		--fs-h3: 0.9rem;
+		--fs-body: 0.75rem;
+	}
+
+	@media (min-width: 800px) {
+		--fs-h1: 4.5rem;
+		--fs-h2: 3.25rem;
+		--fs-h3: 2rem;
+		--fs-h4: 1.6rem;
+		--fs-body: 1.125rem;
+	}
+}
+
+body {
+	background-color: var(--clr-accent-light);
+	font-family: "Alegreya Sans", sans-serif;
+	font-size: var(--fs-body);
+	color: var(--clr-accent-dark);
+}

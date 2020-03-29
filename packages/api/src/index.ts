@@ -1,9 +1,11 @@
 import express from 'express';
+import cors from 'cors';
 import { middlewarelogger } from './middleware/logger';
 import { usersRouter } from './routes/users';
 import { sequelize } from './database';
 import bodyParser from 'body-parser';
 import { conversationsRouter } from './routes/conversations';
+import { messagesRouter } from './routes/messages';
 
 const run = async () => {
 
@@ -23,13 +25,14 @@ const run = async () => {
     // 1. Request
     // 2. Response
     // 3. Next - send you to the next middleware on the pipeline
-
+    app.use(cors());
     app.use(bodyParser.json()); // for parsing application/json
 
     // defining a new pipe
     app.use(middlewarelogger);
     app.use('/users', usersRouter);
     app.use('/conversations', conversationsRouter);
+    app.use('/messages', messagesRouter);
 
     // run the server on port 9999
     app.listen(9999);
