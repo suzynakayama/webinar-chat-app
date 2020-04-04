@@ -20,6 +20,12 @@ class API {
       return null;
     }
   }
+
+    async createConversation(name: string) {
+    const res = await axios.post(`${this.prefix}/conversations`, { name });
+    return res.data;
+  }
+
   
   async getMessages(id: string) {
     const res = await axios.get(`${this.prefix}/conversations/${id}/messages`);

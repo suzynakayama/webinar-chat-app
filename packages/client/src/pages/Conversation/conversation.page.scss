@@ -15,6 +15,13 @@ main {
 			padding-left: 1.5rem;
 		}
 
+		.aside__newBtn {
+			font-size: 30px;
+			color: black;
+			position: relative;
+			padding-bottom: -10rem;
+		}
+
 		h1 {
 			font-size: var(--fs-h1);
 			padding: 0.7rem 1.5rem;
@@ -41,6 +48,7 @@ main {
 
 			ul {
 				text-align: center;
+
 				li a {
 					text-decoration: none;
 					color: inherit;
@@ -133,6 +141,13 @@ main {
 
 				h1 {
 					font-size: var(--fs-h2);
+				}
+
+				ul li {
+					transform: scale(1.2); //TODO FIX
+					&:hover {
+						transition: transform 0.3s ease-in-out; //TODO FIX
+					}
 				}
 
 				ul li a {
