@@ -131,6 +131,10 @@ main {
 				padding: 0;
 				text-align: center;
 
+				h1 {
+					font-size: var(--fs-h2);
+				}
+
 				ul li a {
 					cursor: pointer;
 					font-size: var(--fs-h3);
@@ -172,5 +176,12 @@ main {
 
 	@media (min-width: 1200px) {
 		grid-template-rows: 15vh 70vh 15vh;
+		aside {
+			div {
+				h1 {
+					font-size: var(--fs-h1);
+				}
+			}
+		}
 	}
 }
