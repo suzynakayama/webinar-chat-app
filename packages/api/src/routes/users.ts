@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { User } from '../models/User';
+import bcrypt from 'bcrypt';
 
 export const usersRouter = Router();
 
@@ -20,14 +21,16 @@ usersRouter.get('/:userID', async (req, res) => {
 
 // create one user
 usersRouter.post('/', async (req, res, next) => {
-    const newUser = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password
-    };
     try {
-        const user = new User(newUser);
+        // password: plain, extracts the password out of the body and renames it to plain
+        const { password: plain, ...userData } = req.body;
+
+        // hash the password and save it hashed
+        const password = bcrypt.hashSync(plain, 10);
+        const user = new User({
+            ...userData, //NOTE: this is dangerous
+            password
+        });
         await user.save();
         res.json(user);
     } catch (err) {

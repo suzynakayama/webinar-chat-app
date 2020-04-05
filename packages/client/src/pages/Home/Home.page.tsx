@@ -1,6 +1,11 @@
 import React from "react";
-import "./home.page.scss";
+
+import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 export const HomePage = () => {
-	return <h1>Chat App</h1>;
+	return (
+		<main className="home">
+			<Sidebar />
+		</main>
+	);
 };

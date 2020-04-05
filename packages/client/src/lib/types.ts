@@ -18,3 +18,11 @@ export interface Message {
 export interface Params {
   conversationId: string;
 }
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+

@@ -1,45 +1,74 @@
 import axios from 'axios';
-
+import { setMe, getMe } from '../config';
 class API {
+
   prefix = 'http://localhost:9999';
-  
+
+  async login(email: string, password: string) {
+    return this.request('post', '/auth/login', {
+      email, password
+    });
+  }
+
+  async me() {
+    const me = await this.request('get', '/me');
+    setMe(me);
+    return me;
+  }
+
   async getAllConversations() {
-    try {
-      const res = await axios.get(`${this.prefix}/conversations`);
-      return res.data;
-    } catch (err) {
-      return null;
-    }
+    return this.request('get', '/conversations');
   }
 
   async getConversation(id: string) {
-    try {
-      const res = await axios.get(`${this.prefix}/conversations/${id}`);
-      return res.data;
-    } catch (err) {
-      return null;
-    }
+    return this.request('get', `/conversations/${id}`);
   }
 
-    async createConversation(name: string) {
-    const res = await axios.post(`${this.prefix}/conversations`, { name });
-    return res.data;
+  async createConversation(name: string) {
+    return this.request('post', '/conversations', { name });
   }
 
-  
   async getMessages(id: string) {
-    const res = await axios.get(`${this.prefix}/conversations/${id}/messages`);
-    return res.data;
+    return this.request('get', `/conversations/${id}/messages`);
   }
 
-  async createMessage(conversationId: string, content: string) {
-    const res = await axios.post(`${this.prefix}/messages`, {
-      "userId": "006ca94e-194a-4db1-a31c-9954fce21bb4",
+  async createMessage(
+    conversationId: string,
+    content: string
+  ) {
+    return this.request('post', '/messages', {
+      userId: getMe()!.id,
       content,
       conversationId
     });
-    return res.data;
+  }
+
+  private async request(
+    type: 'get' | 'post',
+    url: string,
+    data?: object
+  ) {
+    const headers = {
+      authorization: `Bearer ${localStorage.getItem('token')}`
+    };
+
+    try {
+      let res: any;
+      if (type === 'get') {
+        res = await axios.get(`${this.prefix}${url}`, {
+          headers
+        });
+      }
+      if (type === 'post') {
+        res = await axios.post(`${this.prefix}${url}`, data, {
+          headers
+        });
+      }
+      return res!.data;
+    } catch (err) {
+      console.log('err', err);
+      return null;
+    }
   }
 }
-
 export const api = new API();

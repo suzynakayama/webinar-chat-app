@@ -6,6 +6,9 @@ import { sequelize } from './database';
 import bodyParser from 'body-parser';
 import { conversationsRouter } from './routes/conversations';
 import { messagesRouter } from './routes/messages';
+import { middlewareAuth } from './middleware/auth';
+import { authRouter } from './routes/auth';
+import { meRouter } from './routes/me';
 
 const run = async () => {
 
@@ -20,7 +23,7 @@ const run = async () => {
         console.log(err);
         console.log('could not connect to db');
     }
-
+    
     // each middleware takes 3 parameters:
     // 1. Request
     // 2. Response
@@ -30,9 +33,11 @@ const run = async () => {
 
     // defining a new pipe
     app.use(middlewarelogger);
-    app.use('/users', usersRouter);
-    app.use('/conversations', conversationsRouter);
-    app.use('/messages', messagesRouter);
+    app.use('/auth', authRouter);
+    app.use('/users', middlewareAuth, usersRouter);
+    app.use('/me', middlewareAuth, meRouter);
+    app.use('/conversations', middlewareAuth, conversationsRouter);
+    app.use('/messages', middlewareAuth, messagesRouter);
 
     // run the server on port 9999
     app.listen(9999);

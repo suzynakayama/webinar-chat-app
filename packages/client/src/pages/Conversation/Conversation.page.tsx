@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { api } from "../../lib/API";
-import {
-	AllConversations,
-	Conversation,
-	Message,
-	Params,
-} from "../../lib/types";
+import { Conversation, Message, Params } from "../../lib/types";
 import { useParams } from "react-router";
 import { SendMessage } from "./SendMessage";
-import { Aside } from "./Aside";
 import "./conversation.page.scss";
 import { CreateConversation } from "./CreateConversation";
+import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 export const ConversationPage = () => {
 	const params = useParams<Params>();
@@ -18,18 +13,19 @@ export const ConversationPage = () => {
 	const [conversation, setConversation] = useState<Conversation>();
 	const [messages, setMessages] = useState<Message[]>([]);
 
-	//whenever the params.conversationid changes, check to see if we are creating new conversation
+	// whenever the params.conversationId changes, check to see if we are creating new conversation
 	const isNew = useMemo(
 		() => params.conversationId === "new", //Returns boolean
 		[params.conversationId]
 	);
 
 	const loadInitialData = async () => {
-		if (isNew) return;
+		if (isNew) return; // Don't load conversations if we are in the new conversation page
+
 		const conversation = await api.getConversation(params.conversationId);
 		if (!conversation) return;
-		setConversation(conversation);
 		const messages = await api.getMessages(params.conversationId);
+		setConversation(conversation);
 		setMessages(messages);
 	};
 
@@ -41,7 +37,7 @@ export const ConversationPage = () => {
 
 	return (
 		<main>
-			<Aside />
+			<Sidebar />
 			{isNew ? (
 				<CreateConversation />
 			) : (

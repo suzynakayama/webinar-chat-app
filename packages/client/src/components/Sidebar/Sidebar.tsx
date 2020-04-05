@@ -1,13 +1,12 @@
-import React, { FormEvent, useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { AllConversations } from "../../lib/types";
+import { useParams } from "react-router";
+import { AllConversations, Params } from "../../lib/types";
 import { api } from "../../lib/API";
+import "./Sidebar.styles.scss";
 
-export interface AsideProps {
-	allConversations: any;
-}
-
-export const Aside: React.FC<AsideProps> = () => {
+export const Sidebar = () => {
+	const params = useParams<Params>();
 	const [opened, setOpened] = useState(false);
 	const isMobile = window.innerWidth <= 750;
 	const [allConversations, setAllConversations] = useState<AllConversations[]>(
@@ -21,7 +20,7 @@ export const Aside: React.FC<AsideProps> = () => {
 
 	useEffect(() => {
 		getAllConversations();
-	}, []);
+	}, [params.conversationId]);
 
 	const openNav = () => {
 		console.log(opened);
@@ -36,19 +35,19 @@ export const Aside: React.FC<AsideProps> = () => {
 						&times;
 					</button>
 					<h1>Chatty</h1>
-
-					<Link className="aside__newBtn" to="/conversations/new">
+					<Link className="aside__newBtn inside" to="/conversations/new">
 						+
 					</Link>
-
 					<ul>
-						{allConversations.map((chat) => (
-							<li key={chat.id}>
-								<Link to={`/conversations/${chat.id}`}>
-									<span>=> {chat.name}</span>
-								</Link>
-							</li>
-						))}
+						{allConversations
+							? allConversations.map((chat) => (
+									<li key={chat.id}>
+										<Link to={`/conversations/${chat.id}`}>
+											<span>=> {chat.name}</span>
+										</Link>
+									</li>
+							  ))
+							: ""}
 					</ul>
 				</div>
 			) : (
@@ -57,6 +56,9 @@ export const Aside: React.FC<AsideProps> = () => {
 						&#9776;
 					</button>
 					<h1>Chatty</h1>
+					<Link className="aside__newBtn" to="/conversations/new">
+						+
+					</Link>
 				</>
 			)}
 		</aside>

@@ -9,6 +9,7 @@
 
 :root {
 	--font-special: "Spicy Rice", cursive;
+	--font-regular: "Alegreya Sans", sans-serif;
 
 	--clr-dark: #1a0b15;
 	--clr-light: #fff;
@@ -20,7 +21,7 @@
 	--fs-h3: 1.15rem;
 	--fs-body: 1rem;
 
-	--shadow-sml: 0.155em 0.155em 0.75em #e6c1dbde;
+	--shadow-sml: 0.155em 0.155em 0.75em #8b869780;
 	--shadow-lg: 0.25em 0.25em 0.75em #aaa, 0.125em 0.125em 0.25em #bbb;
 
 	@media (max-width: 390px) {
@@ -41,7 +42,27 @@
 
 body {
 	background-color: var(--clr-accent-light);
-	font-family: "Alegreya Sans", sans-serif;
+	font-family: var(--font-regular);
 	font-size: var(--fs-body);
 	color: var(--clr-accent-dark);
+}
+
+a {
+	text-decoration: none;
+	color: var(--clr-accent-dark);
+}
+
+input {
+	border-radius: 20px;
+	border: 1.5px solid var(--clr-accent-dark);
+	padding: 10px;
+	font: inherit;
+	font-size: var(--fs-body);
+}
+
+button {
+	color: var(--clr-accent-dark);
+	font-size: var(--fs-body);
+	letter-spacing: 1px;
+	cursor: pointer;
 }

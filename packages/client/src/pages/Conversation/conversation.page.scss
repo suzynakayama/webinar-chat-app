@@ -1,69 +1,24 @@
 main {
 	height: 100vh;
 
-	aside {
-		font-size: var(--fs-h2);
-		display: flex;
-		justify-content: space-between;
-		width: 100vw;
-		color: var(--clr-accent-dark);
-		box-shadow: var(--shadow-sml);
-
-		button {
-			color: var(--clr-accent-dark);
-			font-size: var(--fs-h2);
-			padding-left: 1.5rem;
-		}
-
-		.aside__newBtn {
-			font-size: 30px;
-			color: black;
-			position: relative;
-			padding-bottom: -10rem;
-		}
-
-		h1 {
-			font-size: var(--fs-h1);
-			padding: 0.7rem 1.5rem;
-		}
-
-		div {
-			padding: 1.5rem 3rem;
-			width: 100%;
-
-			button {
-				position: absolute;
-				top: 2rem;
-				left: 1rem;
-				color: var(--clr-accent-dark);
-				font-size: var(--fs-h2);
-			}
-
-			h1 {
-				font-size: var(--fs-h1);
-				padding: 0.7rem 1.5rem;
-				text-align: center;
-				margin: 1rem 0;
-			}
-
-			ul {
-				text-align: center;
-
-				li a {
-					text-decoration: none;
-					color: inherit;
-					font-size: var(--fs-h2);
-				}
-			}
-		}
-	}
-
 	header {
 		margin: 1.5rem 0;
 		font-family: var(--font-special);
 		font-size: var(--fs-h2);
 		text-align: center;
-		text-decoration: underline;
+		// text-decoration: underline;
+
+		.create__input {
+			font-family: var(--font-regular);
+		}
+
+		.create__btn {
+			display: block;
+			margin: 1.5rem auto;
+			padding: 10px;
+			border: 1.5px solid var(--clr-accent-dark);
+			border-radius: 20px;
+		}
 	}
 
 	ul.chat {
@@ -94,20 +49,15 @@ main {
 			justify-content: space-around;
 
 			input {
-				border-radius: 20px;
-				border: 1.5px solid var(--clr-accent-dark);
-				padding: 10px;
 				width: 80%;
-				font: inherit;
-				font-size: var(--fs-body);
 			}
 
 			button {
-				background-color: var(--clr-light);
-				color: var(--clr-accent-dark);
 				font-size: var(--fs-h4);
 				padding: 10px;
 				width: 3.5rem;
+				height: auto;
+				background-color: var(--clr-light);
 				border: 1.5px solid var(--clr-accent-dark);
 				border-radius: 20px;
 				box-shadow: var(--shadow-sml);
@@ -123,39 +73,6 @@ main {
 			"aside newMessage";
 		grid-template-columns: 25vw 75vw;
 		grid-template-rows: 10vh 80vh 10vh;
-
-		aside {
-			grid-area: aside;
-			box-shadow: none;
-			border-right: 3px solid var(--clr-accent-dark);
-			width: 25vw;
-			height: 100vh;
-
-			button {
-				display: none;
-			}
-
-			div {
-				padding: 0;
-				text-align: center;
-
-				h1 {
-					font-size: var(--fs-h2);
-				}
-
-				ul li {
-					transform: scale(1.2); //TODO FIX
-					&:hover {
-						transition: transform 0.3s ease-in-out; //TODO FIX
-					}
-				}
-
-				ul li a {
-					cursor: pointer;
-					font-size: var(--fs-h3);
-				}
-			}
-		}
 
 		header {
 			grid-area: header;
@@ -183,7 +100,6 @@ main {
 					width: 4.5rem;
 					margin-right: 1rem;
 					box-shadow: var(--shadow-lg);
-					cursor: pointer;
 				}
 			}
 		}
@@ -191,12 +107,5 @@ main {
 
 	@media (min-width: 1200px) {
 		grid-template-rows: 15vh 70vh 15vh;
-		aside {
-			div {
-				h1 {
-					font-size: var(--fs-h1);
-				}
-			}
-		}
 	}
 }
