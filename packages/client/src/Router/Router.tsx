@@ -3,6 +3,7 @@ import { Router, Switch, Route } from "react-router-dom";
 import { history } from "./history";
 import { HomePage } from "../pages/Home/Home.page";
 import LoginPage from "../pages/Login/Login.page";
+import SignupPage from "../pages/Signup/Signup.page";
 import { ConversationPage } from "../pages/Conversation/Conversation.page";
 import { api } from "../lib/API";
 
@@ -32,6 +33,7 @@ export const AppRouter = () => {
 					component={ConversationPage}
 				/>
 				<Route exact path="/login" component={LoginPage} />
+				<Route exact path="/signup" component={SignupPage} />
 			</Switch>
 		</Router>
 	);

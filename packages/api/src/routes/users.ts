@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { User } from '../models/User';
-import bcrypt from 'bcrypt';
+import { Op } from 'sequelize/types';
 
 export const usersRouter = Router();
 
@@ -19,24 +19,29 @@ usersRouter.get('/:userID', async (req, res) => {
     res.json(user);
 });
 
-// create one user
-usersRouter.post('/', async (req, res, next) => {
-    try {
-        // password: plain, extracts the password out of the body and renames it to plain
-        const { password: plain, ...userData } = req.body;
 
-        // hash the password and save it hashed
-        const password = bcrypt.hashSync(plain, 10);
-        const user = new User({
-            ...userData, //NOTE: this is dangerous
-            password
+// Search for a user
+usersRouter.get('/search', async (req, res, next) => {
+    const query = req.query.q;
+    try {
+        const users = await User.findAll({
+            where: {
+                $or: [
+                    { firstName: { [Op.like]: `%${query}%` } },
+                    { lastName: { [Op.like]: `%${query}%` } }
+                ]
+            }
         });
-        await user.save();
-        res.json(user);
+        res.json(users.map(user => ({
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName
+        })));
     } catch (err) {
-        next(err);
+        next();
     }
 });
+
 
 // update a user
 usersRouter.patch('/:userID', async (req, res, next) => {

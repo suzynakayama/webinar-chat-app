@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { Conversation } from '../models/Conversation';
+import { middlewareConvo } from '../middleware/authConversation';
 
 export const conversationsRouter = Router();
 
@@ -7,6 +8,7 @@ export const conversationsRouter = Router();
 
 // Get list of conversations
 conversationsRouter.get('/', async (_req, res) => {
+  console.log(res.locals.user)    // where we find the user
   // Fetch ALL the conversations
   const conversations = await Conversation.findAll();
   // Send them in the pipe
@@ -14,7 +16,7 @@ conversationsRouter.get('/', async (_req, res) => {
 });
 
 // Get ONE conversation
-conversationsRouter.get('/:conversationID', async (req, res) => {
+conversationsRouter.get('/:conversationID', middlewareConvo, async (req, res) => {
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);
   res.json(conversation);
@@ -25,6 +27,8 @@ conversationsRouter.post('/', async (req, res, next) => {
   try {
     const conversation = new Conversation(req.body); // NOTE: THIS IS DANGEROUS
     await conversation.save();
+    // when create a new conversation, we add the current user to that conversation
+    await conversation.$add('user', res.locals.user.id);
     res.json(conversation);
   } catch (e) {
     next(e);
@@ -32,7 +36,7 @@ conversationsRouter.post('/', async (req, res, next) => {
 });
 
 // Update a conversation
-conversationsRouter.patch('/:conversationID', async (req, res, next) => {
+conversationsRouter.patch('/:conversationID', middlewareConvo, async (req, res, next) => {
   try {
     await Conversation.update(req.body, {
       where: { id: req.params.conversationID },
@@ -45,8 +49,8 @@ conversationsRouter.patch('/:conversationID', async (req, res, next) => {
   }
 });
 
-// Update a conversation
-conversationsRouter.delete('/:conversationID', async (req, res, next) => {
+// Delete a conversation
+conversationsRouter.delete('/:conversationID', middlewareConvo, async (req, res, next) => {
   try {
     Conversation.destroy({
       where: { id: req.params.conversationID }
@@ -59,7 +63,7 @@ conversationsRouter.delete('/:conversationID', async (req, res, next) => {
   }
 });
 
-conversationsRouter.get('/:conversationID/messages', async (req, res, next) => {
+conversationsRouter.get('/:conversationID/messages', middlewareConvo, async (req, res, next) => {
   // Get the conversation
   const { conversationID } = req.params;
   const conversation = await Conversation.findByPk(conversationID);

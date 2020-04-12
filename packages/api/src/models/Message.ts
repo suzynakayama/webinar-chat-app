@@ -20,7 +20,7 @@ export class Message extends Model<Message> {
 	// column of the conversation id itself
 	@AllowNull(false)
 	@ForeignKey(() => User)
-	@Column
+	@Column(DataType.UUID)
 	userId: string; // who sent the msg
 
 	// for Sequelize to create a one to many relationship
@@ -28,6 +28,6 @@ export class Message extends Model<Message> {
 	user: User;
 
 	@ForeignKey(() => Conversation)
-	@Column
+	@Column(DataType.UUID)
 	conversationId: string;
 };

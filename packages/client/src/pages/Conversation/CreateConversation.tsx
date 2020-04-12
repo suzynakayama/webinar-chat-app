@@ -2,18 +2,18 @@ import React, { useRef, FormEvent, useState } from "react";
 import { api } from "../../lib/API";
 import { Redirect } from "react-router";
 import { Conversation } from "../../lib/types";
+import { Conversations } from "../../containers/conversations.container";
 
 export const CreateConversation = () => {
 	const input = useRef<HTMLInputElement>(null);
 	const [conversation, setConversation] = useState<Conversation>();
 
+	const { createConversation } = Conversations.useContainer();
+
 	const handleSubmit = async (evt: FormEvent) => {
 		evt.preventDefault();
-		const conv = await api.createConversation(input.current?.value!);
-		console.log(input.current?.value);
-		console.log(conv);
+		const conv = await createConversation(input.current?.value!);
 		setConversation(conv);
-		console.log(conversation);
 	};
 
 	if (conversation)

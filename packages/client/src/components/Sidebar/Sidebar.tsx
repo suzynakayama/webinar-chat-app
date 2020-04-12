@@ -4,23 +4,29 @@ import { useParams } from "react-router";
 import { AllConversations, Params } from "../../lib/types";
 import { api } from "../../lib/API";
 import "./Sidebar.styles.scss";
+import { Conversations } from "../../containers/conversations.container";
 
 export const Sidebar = () => {
+	const { allConversations, loadConversations } = Conversations.useContainer();
 	const params = useParams<Params>();
 	const [opened, setOpened] = useState(false);
 	const isMobile = window.innerWidth <= 750;
-	const [allConversations, setAllConversations] = useState<AllConversations[]>(
-		[]
-	);
 
-	const getAllConversations = async () => {
-		const allConversations = await api.getAllConversations();
-		setAllConversations(allConversations);
-	};
+	// OLD WAY, NOW WE ARE USING THE UNSTATED NEXT LIB TO USE CONTEXT
+	// const [allConversations, setAllConversations] = useState<AllConversations[]>(
+	// 	[]
+	// );
+	// const getAllConversations = async () => {
+	// 	const allConversations = await api.getAllConversations();
+	// 	setAllConversations(allConversations);
+	// };
+	// useEffect(() => {
+	// 	getAllConversations();
+	// }, [params.conversationId]);
 
 	useEffect(() => {
-		getAllConversations();
-	}, [params.conversationId]);
+		loadConversations();
+	}, []);
 
 	const openNav = () => {
 		console.log(opened);

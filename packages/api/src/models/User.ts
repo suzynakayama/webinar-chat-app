@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table, Unique, AllowNull, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import { Column, DataType, Model, Table, Unique, AllowNull, DeletedAt, BelongsToMany, IsEmail, Length } from 'sequelize-typescript';
 import { Conversation } from './Conversation';
 import { UserConversation } from './UserConversation';
 
@@ -22,10 +22,12 @@ export class User extends Model<User> {
     @AllowNull(false)
     @Unique
     @Column
+    @IsEmail
     email: string;
 
     @AllowNull(false)
     @Column
+    @Length({ max: 20, min: 6 })
     password: string;
 
     @DeletedAt

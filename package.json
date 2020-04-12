@@ -1,22 +1,25 @@
 {
-    "name": "chat-web-app",
-    "version": "0.0.0",
-    "description": "Chat Web Application for the Code Mentoring Webinar",
-    "main": "index.js",
-    "author": "Tristan Matthias <hello@tristanmatthias.com>",
-    "license": "MIT",
-    "workspaces": [
-        "packages/*"
-    ],
-    "scripts": {
-        "bootstrap": "yarn; lerna bootstrap; lerna link;"
-    },
-    "dependencies": {
-        "lerna": "^3.20.2",
-        "ts-node": "^8.7.0",
-        "tslint": "^6.1.0",
-        "tslint-config-airbnb": "^5.11.2",
-        "typescript": "^3.8.3"
-    },
-    "private": true
+	"name": "chat-web-app",
+	"version": "0.0.0",
+	"description": "Chat Web Application for the Code Mentoring Webinar",
+	"main": "index.js",
+	"author": "Tristan Matthias <hello@tristanmatthias.com>",
+	"license": "MIT",
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"postinstall": "cd packages/api; yarn build",
+		"bootstrap": "yarn; lerna bootstrap; lerna link;",
+		"start-api": "cd packages/api; yarn start",
+		"build-client": "cd packages/client; yarn build"
+	},
+	"dependencies": {
+		"lerna": "^3.20.2",
+		"ts-node": "^8.7.0",
+		"tslint": "^6.1.0",
+		"tslint-config-airbnb": "^5.11.2",
+		"typescript": "^3.8.3"
+	},
+	"private": true
 }

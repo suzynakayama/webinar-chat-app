@@ -2,11 +2,23 @@ import axios from 'axios';
 import { setMe, getMe } from '../config';
 class API {
 
-  prefix = 'http://localhost:9999';
+  // prefix = 'http://localhost:9999';
+  prefix = 'API_URL';   // Replaced in webpack depending on the NODE_ENV
 
   async login(email: string, password: string) {
     return this.request('post', '/auth/login', {
       email, password
+    });
+  }
+
+    async signup(
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    return this.request('post', '/auth/signup', {
+      firstName, lastName, email, password
     });
   }
 

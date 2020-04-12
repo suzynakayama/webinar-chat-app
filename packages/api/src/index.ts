@@ -9,11 +9,16 @@ import { messagesRouter } from './routes/messages';
 import { middlewareAuth } from './middleware/auth';
 import { authRouter } from './routes/auth';
 import { meRouter } from './routes/me';
+import {Server} from 'http';
+import io from 'socket.io';
+// import sockets from './lib/sockets';
 
 const run = async () => {
 
     // create the instance of an API
     const app = express();
+    const server = new Server(app);
+    const Io = io(server);
 
     try {
         await sequelize.authenticate();
@@ -39,10 +44,19 @@ const run = async () => {
     app.use('/conversations', middlewareAuth, conversationsRouter);
     app.use('/messages', middlewareAuth, messagesRouter);
 
-    // run the server on port 9999
-    app.listen(9999);
+    // const sockets = io();
+    // console.log(sockets);
 
-    console.log('API running on port http://localhost:9999');
+    Io.on('connection', socket => {
+        console.log('server')
+        socket.emit('news', {});
+        socket.on('my other event', data => { console.log(data) });
+    });
+
+    const port = process.env.PORT || 9999;
+
+    // run the server on port 9999
+    server.listen(port, () => console.log(`API running on port http://localhost:${port}`));
 };
 
 run();

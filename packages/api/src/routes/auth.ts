@@ -6,6 +6,28 @@ import { TOKEN_SECRET } from '../utils/config';
 
 export const authRouter = Router();
 
+// Create a user
+authRouter.post('/signup', async (req, res, next) => {
+  try {
+    const { password: plain, ...userData } = req.body;
+
+    // Salt and hash the passwords in the database so they're not stored in plain text
+    // 10 is the number of times to encrypt
+    const salt = bcrypt.genSaltSync(10);
+    const password = bcrypt.hashSync(plain, salt);
+
+    const user = new User({
+      ...userData, // NOTE: THIS IS DANGEROUS
+      password
+    });
+    await user.save();
+    res.json(user);
+  } catch (e) {
+    next(e);
+  }
+});
+
+// Login a user
 authRouter.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
