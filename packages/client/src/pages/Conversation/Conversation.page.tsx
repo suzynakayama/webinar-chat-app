@@ -50,11 +50,13 @@ export const ConversationPage = () => {
 					</header>
 
 					<ul className="chat">
-						{messages.map((msg) => (
-							<li key={msg.id} className="chat__li">
-								<span className="chat__span">{msg.content}</span>
-							</li>
-						))}
+						{messages
+							? messages.map((msg) => (
+									<li key={msg.id} className="chat__li">
+										<span className="chat__span">{msg.content}</span>
+									</li>
+							  ))
+							: ""}
 					</ul>
 
 					<footer>
