@@ -1,9 +1,9 @@
 import { UserConversation } from "../models/UserConversation";
 
-export const checkUserConvo = async (userId: string, conversationID: string) => {
+export const checkUserConvo = async (userID: string, conversationID: string) => {
     const exists = await UserConversation.findOne({
     where: {
-      userId,
+      userID,
       conversationID
     }
   });
