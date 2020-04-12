@@ -9,16 +9,19 @@ import { messagesRouter } from './routes/messages';
 import { middlewareAuth } from './middleware/auth';
 import { authRouter } from './routes/auth';
 import { meRouter } from './routes/me';
-import {Server} from 'http';
-import io from 'socket.io';
+import { createServer } from 'http';
+
+// import {Server} from 'http';
+// import io from 'socket.io';
 // import sockets from './lib/sockets';
 
 const run = async () => {
 
     // create the instance of an API
     const app = express();
-    const server = new Server(app);
-    const Io = io(server);
+    const http = createServer(app);
+    // const server = new Server(app);
+    // const Io = io(server);
 
     try {
         await sequelize.authenticate();
@@ -47,16 +50,16 @@ const run = async () => {
     // const sockets = io();
     // console.log(sockets);
 
-    Io.on('connection', socket => {
-        console.log('server')
-        socket.emit('news', {});
-        socket.on('my other event', data => { console.log(data) });
-    });
+    // Io.on('connection', socket => {
+    //     console.log('server')
+    //     socket.emit('news', {});
+    //     socket.on('my other event', data => { console.log(data) });
+    // });
 
     const port = process.env.PORT || 9999;
 
     // run the server on port 9999
-    server.listen(port, () => console.log(`API running on port http://localhost:${port}`));
+    http.listen(port, () => console.log(`API running on port http://localhost:${port}`));
 };
 
 run();
