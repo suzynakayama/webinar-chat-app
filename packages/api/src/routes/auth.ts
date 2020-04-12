@@ -51,7 +51,7 @@ authRouter.post('/login', async (req, res) => {
 
   // 3.Generate token and encrypt user data in token
   const secret: any = TOKEN_SECRET;
-  const { password: p, ...userData} = user.toJSON() as User;
+  const { password: p, ...userData } = user.toJSON() as User;
   const token = jwt.sign(userData, secret);
 
   // 4.Send back the token

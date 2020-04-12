@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { User } from '../models/User';
-import { Op } from 'sequelize/types';
+import { Op } from 'sequelize';
 
 export const usersRouter = Router();
 
