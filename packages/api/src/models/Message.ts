@@ -21,7 +21,7 @@ export class Message extends Model<Message> {
 	@AllowNull(false)
 	@ForeignKey(() => User)
 	@Column(DataType.UUID)
-	userId: string; // who sent the msg
+	userID: string; // who sent the msg
 
 	// for Sequelize to create a one to many relationship
 	@BelongsTo(() => Conversation)
