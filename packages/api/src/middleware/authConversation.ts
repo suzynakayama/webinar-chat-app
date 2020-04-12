@@ -5,10 +5,12 @@ import { checkUserConvo } from '../lib/checkUserConvo';
 
 export const middlewareConvo: RequestHandler = async (req, res, next) => {
   const { conversationID } = req.params;
+  console.log(conversationID)
   const userId = res.locals.user.id;
   try {
     await checkUserConvo(userId, conversationID);
   } catch (err) {
     next(err);
   }
+  next()
 }

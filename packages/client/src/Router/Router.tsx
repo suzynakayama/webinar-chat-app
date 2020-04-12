@@ -6,6 +6,7 @@ import LoginPage from "../pages/Login/Login.page";
 import SignupPage from "../pages/Signup/Signup.page";
 import { ConversationPage } from "../pages/Conversation/Conversation.page";
 import { api } from "../lib/API";
+import { ConversationsPage } from "../pages/Conversation/Conversations.page";
 
 export const AppRouter = () => {
 	const [loading, setLoading] = useState(true);
@@ -27,6 +28,7 @@ export const AppRouter = () => {
 		<Router history={history}>
 			<Switch>
 				<Route exact path="/" component={HomePage} />
+				<Route exact path="/conversations" component={ConversationsPage} />
 				<Route
 					exact
 					path="/conversations/:conversationId"

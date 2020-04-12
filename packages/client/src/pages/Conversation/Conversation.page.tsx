@@ -21,7 +21,6 @@ export const ConversationPage = () => {
 
 	const loadInitialData = async () => {
 		if (isNew) return; // Don't load conversations if we are in the new conversation page
-
 		const conversation = await api.getConversation(params.conversationId);
 		if (!conversation) return;
 		const messages = await api.getMessages(params.conversationId);

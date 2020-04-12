@@ -35,7 +35,7 @@ const SignupPage = () => {
 		localStorage.setItem("token", data.token);
 	};
 
-	if (loggedIn) return <Redirect to="/" />;
+	if (loggedIn) return <Redirect to="/conversations" />;
 
 	return (
 		<main className="login">
