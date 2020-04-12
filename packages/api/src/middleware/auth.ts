@@ -31,4 +31,5 @@ export const middlewareAuth: RequestHandler = (req, res, next) => {
   }
   
   next();
+  return;
 };
