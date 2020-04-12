@@ -45,13 +45,13 @@ class API {
   }
 
   async createMessage(
-    conversationId: string,
+    conversationID: string,
     content: string
   ) {
     return this.request('post', '/messages', {
       userID: getMe()!.id,
       content,
-      conversationId
+      conversationID
     });
   }
 
