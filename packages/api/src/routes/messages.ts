@@ -8,8 +8,8 @@ export const messagesRouter = Router();
 messagesRouter.post('/', async (req, res, next) => {
   try {
     checkUserConvo(res.locals.user.id, req.body.conversationID);
-    const { content, userId, conversationID } = req.body;
-    const message = new Message({content, userId, conversationID});
+    const { content, userID, conversationID } = req.body;
+    const message = new Message({content, userID, conversationID});
     await message.save();
     res.json(message);
   } catch (e) {
