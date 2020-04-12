@@ -9,12 +9,13 @@ export interface SendMessageProps {
 
 export const SendMessage: React.FC<SendMessageProps> = ({
 	conversationId,
-	onNewMessage
+	onNewMessage,
 }) => {
 	const input = useRef<HTMLInputElement>(null);
 
 	const handleSubmit = async (evt: FormEvent) => {
 		evt.preventDefault();
+		evt.stopPropagation();
 		// console.log(input.current?.value);
 		// exclamation mark (!) just say it actually does exist.
 		const message = await api.createMessage(
@@ -27,9 +28,9 @@ export const SendMessage: React.FC<SendMessageProps> = ({
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<input type='text' ref={input} />
-			<button type='submit' onClick={handleSubmit}>
-				<i className='fas fa-paper-plane'></i>
+			<input type="text" ref={input} />
+			<button type="submit" onClick={handleSubmit}>
+				<i className="fas fa-paper-plane"></i>
 			</button>
 		</form>
 	);

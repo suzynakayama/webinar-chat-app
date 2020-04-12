@@ -13,6 +13,7 @@ const SignupPage = () => {
 
 	const handleSubmit = async (evt: FormEvent) => {
 		evt.preventDefault();
+		evt.stopPropagation();
 
 		// Reset the error on multiple login attempts
 		setError(false);

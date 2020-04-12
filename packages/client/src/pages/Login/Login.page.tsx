@@ -11,6 +11,7 @@ const LoginPage = () => {
 
 	const handleSubmit = async (evt: FormEvent) => {
 		evt.preventDefault();
+		evt.stopPropagation();
 
 		// reset the error on multiple login attempts
 		setError(false);
