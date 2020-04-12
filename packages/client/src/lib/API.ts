@@ -49,7 +49,7 @@ class API {
     content: string
   ) {
     return this.request('post', '/messages', {
-      userId: getMe()!.id,
+      userID: getMe()!.id,
       content,
       conversationId
     });
