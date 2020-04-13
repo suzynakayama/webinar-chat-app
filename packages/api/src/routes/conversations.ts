@@ -70,7 +70,6 @@ conversationsRouter.get('/:conversationID/messages', middlewareConvo, async (req
   
   if (!conversation) return next(new Error('No conversation with that id'));
   // Get the messages in the one to many relationship
-  // question mark is an option for this if, conversation?.$get
   const messages = await conversation.$get('messages');
   // Same thing as above:
   //   Message.findAll({

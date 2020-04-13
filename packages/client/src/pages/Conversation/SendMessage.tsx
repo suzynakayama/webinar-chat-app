@@ -3,12 +3,12 @@ import { api } from "../../lib/API";
 import { Message } from "../../lib/types";
 
 export interface SendMessageProps {
-	conversationId: string;
+	conversationID: string;
 	onNewMessage: (message: Message) => void;
 }
 
 export const SendMessage: React.FC<SendMessageProps> = ({
-	conversationId,
+	conversationID,
 	onNewMessage,
 }) => {
 	const input = useRef<HTMLInputElement>(null);
@@ -18,7 +18,7 @@ export const SendMessage: React.FC<SendMessageProps> = ({
 		// console.log(input.current?.value);
 		// exclamation mark (!) just say it actually does exist.
 		const message = await api.createMessage(
-			conversationId,
+			conversationID,
 			input.current?.value!
 		);
 		onNewMessage(message);
