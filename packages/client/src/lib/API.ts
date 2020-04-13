@@ -61,7 +61,8 @@ class API {
     data?: object
   ) {
     const headers = {
-      authorization: `Bearer ${localStorage.getItem('token')}`
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
     };
 
     try {
