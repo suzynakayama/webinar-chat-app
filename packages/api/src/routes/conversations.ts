@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { Conversation } from '../models/Conversation';
+import { Message } from '../models/Message';
 import { middlewareConvo } from '../middleware/authConversation';
 
 export const conversationsRouter = Router();
@@ -70,11 +71,11 @@ conversationsRouter.get('/:conversationID/messages', middlewareConvo, async (req
   
   if (!conversation) return next(new Error('No conversation with that id'));
   // Get the messages in the one to many relationship
-  const messages = await conversation.$get('messages');
+  // const messages = await conversation.$get('messages');
   // Same thing as above:
-  //   Message.findAll({
-  //   where: {conversationId: conversationID}
-  // })
+    const messages = await Message.findAll({
+    where: { conversationID }
+  })
 
   // Return the messages
   res.json(messages);
