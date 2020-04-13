@@ -25,7 +25,9 @@ export const ConversationPage = () => {
 		if (!conversation) return;
 		const messages = await api.getMessages(params.conversationID);
 		setConversation(conversation);
-		setMessages(messages);
+		if (messages) {
+			setMessages(messages);
+		}
 	};
 
 	useEffect(() => {
@@ -50,11 +52,13 @@ export const ConversationPage = () => {
 					</header>
 
 					<ul className="chat">
-						{messages.map((msg) => (
-							<li key={msg.id} className="chat__li">
-								<span className="chat__span">{msg.content}</span>
-							</li>
-						))}
+						{messages.length
+							? messages.map((msg) => (
+									<li key={msg.id} className="chat__li">
+										<span className="chat__span">{msg.content}</span>
+									</li>
+							  ))
+							: ""}
 					</ul>
 
 					<footer>
