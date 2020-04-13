@@ -24,7 +24,7 @@ export class Message extends Model<Message> {
 	userID: string; // who sent the msg
 
 	// for Sequelize to create a one to many relationship
-	@BelongsTo(() => Conversation)
+	@BelongsTo(() => User)
 	user: User;
 
 	@ForeignKey(() => Conversation)
