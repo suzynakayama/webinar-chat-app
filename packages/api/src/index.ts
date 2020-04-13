@@ -38,7 +38,7 @@ const run = async () => {
     // 3. Next - send you to the next middleware on the pipeline
     app.use(cors());
     app.use(bodyParser.json()); // for parsing application/json
-    app.use(function(req, res, next) {
+    app.use(function(_req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
