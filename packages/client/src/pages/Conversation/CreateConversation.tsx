@@ -1,5 +1,5 @@
 import React, { useRef, FormEvent, useState } from "react";
-import { api } from "../../lib/API";
+// import { api } from "../../lib/API";
 import { Redirect } from "react-router";
 import { Conversation } from "../../lib/types";
 import { Conversations } from "../../containers/conversations.container";
@@ -16,8 +16,9 @@ export const CreateConversation = () => {
 		setConversation(conv);
 	};
 
-	if (conversation)
+	if (conversation) {
 		return <Redirect to={`/conversations/${conversation.id}`} />;
+	}
 
 	return (
 		<header className="create">

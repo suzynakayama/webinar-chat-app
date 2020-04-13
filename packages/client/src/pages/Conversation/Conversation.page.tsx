@@ -15,22 +15,22 @@ export const ConversationPage = () => {
 
 	// whenever the params.conversationId changes, check to see if we are creating new conversation
 	const isNew = useMemo(
-		() => params.conversationId === "new", //Returns boolean
-		[params.conversationId]
+		() => params.conversationID === "new", //Returns boolean
+		[params.conversationID]
 	);
 
 	const loadInitialData = async () => {
 		if (isNew) return; // Don't load conversations if we are in the new conversation page
-		const conversation = await api.getConversation(params.conversationId);
+		const conversation = await api.getConversation(params.conversationID);
 		if (!conversation) return;
-		const messages = await api.getMessages(params.conversationId);
+		const messages = await api.getMessages(params.conversationID);
 		setConversation(conversation);
 		setMessages(messages);
 	};
 
 	useEffect(() => {
 		loadInitialData();
-	}, [params.conversationId]);
+	}, [params.conversationID]);
 
 	if (!conversation && !isNew) return <span>Loading...</span>;
 

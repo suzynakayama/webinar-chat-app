@@ -16,7 +16,7 @@ export interface Message {
 }
 
 export interface Params {
-  conversationId: string;
+  conversationID: string;
 }
 
 export interface User {

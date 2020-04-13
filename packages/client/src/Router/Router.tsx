@@ -31,7 +31,7 @@ export const AppRouter = () => {
 				<Route exact path="/conversations" component={ConversationsPage} />
 				<Route
 					exact
-					path="/conversations/:conversationId"
+					path="/conversations/:conversationID"
 					component={ConversationPage}
 				/>
 				<Route exact path="/login" component={LoginPage} />

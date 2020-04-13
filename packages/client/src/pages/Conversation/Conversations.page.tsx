@@ -13,8 +13,8 @@ export const ConversationsPage = () => {
 
 	// whenever the params.conversationId changes, check to see if we are creating new conversation
 	const isNew = useMemo(
-		() => params.conversationId === "new", //Returns boolean
-		[params.conversationId]
+		() => params.conversationID === "new", //Returns boolean
+		[params.conversationID]
 	);
 
 	const loadInitialData = async () => {
@@ -27,7 +27,7 @@ export const ConversationsPage = () => {
 
 	useEffect(() => {
 		loadInitialData();
-	}, [params.conversationId]);
+	}, [params.conversationID]);
 
 	if (!conversations && !isNew) return <span>Loading...</span>;
 

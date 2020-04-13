@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router";
-import { AllConversations, Params } from "../../lib/types";
-import { api } from "../../lib/API";
+// import { useParams } from "react-router";
+// import { AllConversations, Params } from "../../lib/types";
+// import { api } from "../../lib/API";
 import "./Sidebar.styles.scss";
 import { Conversations } from "../../containers/conversations.container";
 
 export const Sidebar = () => {
 	const { allConversations, loadConversations } = Conversations.useContainer();
-	const params = useParams<Params>();
+	// const params = useParams<Params>();
 	const [opened, setOpened] = useState(false);
 	const isMobile = window.innerWidth <= 750;
 
