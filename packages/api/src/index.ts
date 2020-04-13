@@ -19,7 +19,7 @@ const run = async () => {
 
     // create the instance of an API
     const app = express();
-    const http = createServer(app);
+    // const http = createServer(app);
     // const server = new Server(app);
     // const Io = io(server);
 
@@ -38,11 +38,6 @@ const run = async () => {
     // 3. Next - send you to the next middleware on the pipeline
     app.use(cors());
     app.use(bodyParser.json()); // for parsing application/json
-    app.use(function(_req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-    });
 
     // defining a new pipe
     app.use(middlewarelogger);
@@ -64,7 +59,7 @@ const run = async () => {
     const port = process.env.PORT || 9999;
 
     // run the server on port 9999
-    http.listen(port, () => console.log(`API running on port http://localhost:${port}`));
+    app.listen(port, () => console.log(`API running on port http://localhost:${port}`));
 };
 
 run();
