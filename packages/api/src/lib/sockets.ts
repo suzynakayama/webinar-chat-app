@@ -1,10 +1,11 @@
-// import { Server } from "socket.io";
+import { Server } from 'socket.io';
 
-// export default (s: Server) => {
-//   s.on(
-//     'connection', (res) => {
-//       console.log('Got a connection');
-//       res.send('Hello from Socket API');
-//     });
-// }
+export default (s: Server) => {
+  s.on('connection', (socket) => {
+    console.log('Got a connection');
 
+    socket.on('message', function (message: string) {
+      console.log(message);
+    });
+  });
+};
